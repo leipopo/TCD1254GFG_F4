@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "tcddriver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +44,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+tcddata tcdd;
+float os_V_V_proportion;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,7 +56,10 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    TCD_RW(&tcdd, os_V_V_proportion);
+}
 /* USER CODE END 0 */
 
 /**
@@ -89,7 +93,11 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
-
+	os_V_V_proportion = init_vrefint_reciprocal();
+  HAL_TIM_Base_Start_IT(&sclk);
+ HAL_TIM_PWM_Start(&sclk, sclk_ch);
+	
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */

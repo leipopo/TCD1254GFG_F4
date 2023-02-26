@@ -11,11 +11,12 @@ void scanstart(tcddata *t)
 
 static void scanstop(tcddata *t)
 {
-    HAL_GPIO_WritePin(icg_iogroup, icg_io, GPIO_PIN_RESET);
+    icgpulldown;
     delay_ns(t2);
+    shpullup;
     t->sh_tick  = 0;
     t->switcher = false;
-    delay_ns(t3);
+    delay_ns(t3 * 2);
 }
 
 /*
@@ -53,14 +54,14 @@ void TCD_RW(tcddata *t, float os_vvp)
         if (t->switcher == true) {
             t->voltage[t->sh_tick] = get_os_signal(os_vvp); // 读取os信号
             t->sh_tick++;
-            HAL_GPIO_WritePin(sh_iogroup, sh_io, GPIO_PIN_RESET);
+            shpulldown;
         }
     } // 拉低sh开始一个读取周期
 
     if ((t->switcher == true) && (t->sh_tick == 1) && ((t->master_tick - 2) % 40 == 0)) // 在满足t1条件下拉高icg开始一个读取周期
     {
         delay_ns(mastertick_period / 2 - t4); // 在满足t4条件下拉高icg开始一个读取周期
-        HAL_GPIO_WritePin(icg_iogroup, icg_io, GPIO_PIN_SET);
+        icgpullup;
     }
 
     if (t->sh_tick > 2532 + 1 && ((t->master_tick - 11) % 40 == 0)) // 满足t2条件下拉低icg并上拉sh结束一个读取周期
