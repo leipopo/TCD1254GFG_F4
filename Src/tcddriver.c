@@ -96,7 +96,7 @@ static uint16_t adcx_get_chx_value(ADC_HandleTypeDef *ADCx, uint32_t ch)
     static ADC_ChannelConfTypeDef sConfig = {0};
     sConfig.Channel                       = ch;
     sConfig.Rank                          = 1;
-    sConfig.SamplingTime                  = 8;
+    sConfig.SamplingTime                  = ADC_SAMPLETIME_3CYCLES;
 
     if (HAL_ADC_ConfigChannel(ADCx, &sConfig) != HAL_OK) {
         Error_Handler();
