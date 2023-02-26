@@ -93,7 +93,9 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
+	
 	os_V_V_proportion = init_vrefint_reciprocal();
+	tcdd.switcher = true;
   HAL_TIM_Base_Start_IT(&sclk);
 	HAL_TIM_PWM_Start(&sclk, sclk_ch);
 	
@@ -108,7 +110,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    delay_ns(t3*2);
+
   }
   /* USER CODE END 3 */
 }

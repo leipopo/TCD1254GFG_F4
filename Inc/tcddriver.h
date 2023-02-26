@@ -3,7 +3,7 @@
 
 #include "tim.h"
 #include "adc.h"
-#define true              0x00
+#define true              0x01
 #define false             0x00
 #define sclk              htim8
 #define sclk_ch           TIM_CHANNEL_4

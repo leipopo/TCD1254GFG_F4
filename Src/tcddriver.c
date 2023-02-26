@@ -78,6 +78,7 @@ static void scanstop(tcddata *t)
     t->os_tick     = 0;
     t->master_tick = 0;
     t->switcher    = false;
+    delay_ns(t3 * 4);
 }
 
 /*
@@ -93,6 +94,18 @@ void TCD_RW(tcddata *t, float os_vvp)
         t->master_tick++;
     }
 
+    if (t->os_tick > 2547 + 4) // 满足t2条件下拉低icg并上拉sh结束一个读取周期
+    {
+        HAL_NVIC_DisableIRQ(TIM8_UP_TIM13_IRQn);
+        icgpulldown;
+        delay_ns(t2);
+        shpullup;
+        t->os_tick     = 0;
+        t->master_tick = 0;
+        t->switcher    = false;
+        delay_ns(t3 * 2);
+    }
+
     if ((t->switcher == true) && (t->os_tick == 5)) // 在满足t1条件下拉高icg开始一个读取周期
     {
         delay_ns(mastertick_period / 2 - t4 * 5); // 在满足t4条件下拉高icg开始一个读取周期
@@ -101,16 +114,11 @@ void TCD_RW(tcddata *t, float os_vvp)
 
     if (t->master_tick % 2 == 0) {
         if (t->switcher == true) {
-            if (t->os_tick > 5) {
+            if (t->os_tick >= 5) {
                 t->voltage[t->os_tick - 5] = get_os_signal(os_vvp); // 读取os信号
             }
 
             t->os_tick++;
         }
-    }
-
-    if (t->os_tick > 2547+3) // 满足t2条件下拉低icg并上拉sh结束一个读取周期
-    {
-        scanstop(t);
     }
 }
