@@ -95,7 +95,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	os_V_V_proportion = init_vrefint_reciprocal();
   HAL_TIM_Base_Start_IT(&sclk);
- HAL_TIM_PWM_Start(&sclk, sclk_ch);
+	HAL_TIM_PWM_Start(&sclk, sclk_ch);
 	
 	
   /* USER CODE END 2 */
@@ -104,9 +104,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    scanstart(&tcdd);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    delay_ns(t3*2);
   }
   /* USER CODE END 3 */
 }

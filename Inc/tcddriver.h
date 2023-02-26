@@ -10,7 +10,7 @@
 #define mastertick_period 500   // 500ns
 #define t1                5000  // 5000ns
 #define t2                500   // 500ns
-#define t3                2000  // 1000ns
+#define t3                1000  // 1000ns
 #define t4                20    // 20ns
 #define tint_min          10000 // 10000ns
 
@@ -27,7 +27,7 @@
 
 typedef struct tcd_data {
     uint8_t switcher;
-    uint16_t sh_tick;
+    uint16_t os_tick;
     uint32_t master_tick;
     float voltage[2547];
 } tcddata;
@@ -36,6 +36,4 @@ void scanstart(tcddata *t);
 void TCD_RW(tcddata *t, float os_vvp);
 void delay_ns(int16_t ns);
 float init_vrefint_reciprocal(void);
-static float get_os_signal(float voltage_vrefint_proportion);
-static uint16_t adcx_get_chx_value(ADC_HandleTypeDef *ADCx, uint32_t ch);
 #endif
