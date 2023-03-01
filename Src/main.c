@@ -59,6 +59,7 @@ void SystemClock_Config(void);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     TCD_RW(&tcdd, os_V_V_proportion);
+    HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_1);
 }
 /* USER CODE END 0 */
 
