@@ -33,6 +33,9 @@
                 "path": "Src/adc.c"
               },
               {
+                "path": "Src/dma.c"
+              },
+              {
                 "path": "Src/gpio.c"
               },
               {
