@@ -29,7 +29,7 @@
 #define ccdsize 3000
 
 
-void scanstart();
+void scanstart(void);
 void delay_ns(int16_t ns);
 float init_vrefint_reciprocal(void);
 #endif

@@ -22,7 +22,7 @@ void delay_ns(int16_t ns)
     }
 }
 
-void scanstart()
+void scanstart(void)
 {
     __HAL_TIM_ENABLE(&icg_tim);
     __HAL_TIM_ENABLE(&sh_tim);

@@ -94,6 +94,10 @@ int main(void)
     MX_TIM5_Init();
     MX_TIM3_Init();
     /* USER CODE BEGIN 2 */
+    HAL_TIM_Base_Start(&os_tim);
+    HAL_TIM_Base_Start(&ms_tim);
+    HAL_TIM_Base_Start(&icg_tim);
+    HAL_TIM_Base_Start(&sh_tim);
     HAL_TIM_PWM_Start(&os_tim, os_tim_ch);
     HAL_TIM_PWM_Start(&ms_tim, ms_tim_ch);
     HAL_TIM_OnePulse_Start(&icg_tim, icg_tim_ch);
@@ -108,7 +112,7 @@ int main(void)
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
-        HAL_Delay(40);
+        HAL_Delay(5);
     }
     /* USER CODE END 3 */
 }
