@@ -92,6 +92,8 @@ int main(void)
   MX_GPIO_Init();
   MX_ADC1_Init();
   MX_TIM8_Init();
+  MX_TIM4_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 	
 	os_V_V_proportion = init_vrefint_reciprocal();
