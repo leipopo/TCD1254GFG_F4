@@ -14,8 +14,8 @@
 #define ms_tim htim8
 #define ms_tim_ch TIM_CHANNEL_4
 
-#define sh_tim htim5
-#define sh_tim_ch TIM_CHANNEL_4
+#define sh_tim htim2
+#define sh_tim_ch TIM_CHANNEL_1
 
 #define icg_tim htim4
 #define icg_tim_ch TIM_CHANNEL_1
@@ -30,6 +30,5 @@
 
 
 void scanstart(void);
-void delay_ns(int16_t ns);
-float init_vrefint_reciprocal(void);
+extern volatile uint16_t CCDDataBuffer[ccdsize];
 #endif
