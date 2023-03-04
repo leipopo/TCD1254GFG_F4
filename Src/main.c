@@ -106,8 +106,9 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
     while (1) {
-			HAL_ADC_Start_DMA(&hadc1, (uint32_t *)CCDDataBuffer, ccdsize);
+			
         scanstart();
+			HAL_ADC_Start_DMA(&hadc1, (uint32_t *)CCDDataBuffer, ccdsize);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
