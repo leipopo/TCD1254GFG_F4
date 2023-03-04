@@ -29,10 +29,10 @@
 #define ccdsize 3000
 
 #define stepsthreshold_d 1000
-#define interftol_d 100 
+#define interftol_d 1000 
 
 void scanstart(void);
 int stepsdistance(uint16_t *data, uint32_t size);
-void scanstop(void);
+int scanstop(void);
 extern volatile uint16_t CCDDataBuffer[ccdsize];
 #endif
