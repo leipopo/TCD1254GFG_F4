@@ -28,21 +28,20 @@
 
 #define ccdsize 2600
 
-#define stepsthreshold_d 1000
-#define interftol_d 1000 
+#define stepsthreshold 1500
 
 #define sampletime 20 
-typedef struct CCDDATASOLVER
+typedef struct 
 {
     uint8_t streamstate;
     uint8_t streamcount;
-    uint16_t sampledata[sampletime][ccdsize];
     uint32_t postion[sampletime]; 
-};
+    uint32_t result;
+}CCDDATASOLVER;
 
 
 void scanstart(void);
-int stepsdistance(uint16_t *data, uint32_t size);
-void scanstop(void);
+void steppos(uint16_t *data, uint32_t size, CCDDATASOLVER *cds);
+void scanstop(CCDDATASOLVER *cds);
 extern volatile uint16_t CCDDataBuffer[ccdsize];
 #endif
