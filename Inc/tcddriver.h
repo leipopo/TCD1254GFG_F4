@@ -36,7 +36,7 @@ typedef struct
     uint8_t streamstate;
     uint8_t streamcount;
     uint32_t postion[sampletime]; 
-    uint32_t result;
+    float result;
 }CCDDATASOLVER;
 
 
