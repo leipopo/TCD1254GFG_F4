@@ -31,8 +31,15 @@
 #define stepsthreshold_d 1000
 #define interftol_d 1000 
 
+// typedef struct CCDDATASOLVER
+// {
+//     uint32_t steppos[2];
+//     uint32_t stepdistance;
+// };
+
+
 void scanstart(void);
 int stepsdistance(uint16_t *data, uint32_t size);
-int scanstop(void);
+void scanstop(void);
 extern volatile uint16_t CCDDataBuffer[ccdsize];
 #endif
