@@ -19,7 +19,7 @@ void scanstop(void)
 }
 
 // 此函数假定adc采样中有一个阶跃
-// int stepsdistance(uint16_t *data, uint32_t size)
-// {
+int stepsdistance(uint16_t *data, uint32_t size)
+{
     
-// }
+}

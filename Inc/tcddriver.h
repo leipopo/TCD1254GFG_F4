@@ -26,16 +26,19 @@
 #define osadc             hadc1
 #define osadc_ch          ADC_CHANNEL_8
 
-#define ccdsize 3000
+#define ccdsize 2600
 
 #define stepsthreshold_d 1000
 #define interftol_d 1000 
 
-// typedef struct CCDDATASOLVER
-// {
-//     uint32_t steppos[2];
-//     uint32_t stepdistance;
-// };
+#define sampletime 20 
+typedef struct CCDDATASOLVER
+{
+    uint8_t streamstate;
+    uint8_t streamcount;
+    uint16_t sampledata[sampletime][ccdsize];
+    uint32_t postion[sampletime]; 
+};
 
 
 void scanstart(void);
