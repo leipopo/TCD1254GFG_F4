@@ -114,6 +114,7 @@ int main(void)
 
         /* USER CODE BEGIN 3 */
         scanstop(&cds);
+			
     }
     /* USER CODE END 3 */
 }

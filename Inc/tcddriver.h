@@ -4,10 +4,10 @@
 #include "tim.h"
 #include "adc.h"
 
-#define ccdpixel_width 0.00525 //ccd像素宽度 毫米
-#define focal_length 15.18 //聚光凸透镜焦距
-#define install_distance 11 //光源轴心到透镜主光轴的安装距离
-#define pixeltodistance(pixel_position) focal_length+focal_length*install_distance/(pixel_position*ccdpixel_width)
+#define ccdpixel_width 0.00525f //ccd像素宽度 毫米
+#define focal_length 15.18f //聚光凸透镜焦距
+#define install_distance 11.f //光源轴心到透镜主光轴的安装距离
+#define pixeltodistance(pixel_position) focal_length+focal_length*install_distance/((2500-pixel_position)*ccdpixel_width)
 
 #define mastertick_period 500   // 500ns
 #define t1                5000  // 5000ns
@@ -32,17 +32,17 @@
 #define osadc_ch          ADC_CHANNEL_8
 
 #define ccdsize 2600
-#define dummyposition 20
+#define dummyposition 23
 
-#define stepsthreshold 1600 //需保证环境光大于此值
+#define stepsthreshold 1300 //需保证环境光大于此值
 
-#define sampletime 20 //采样次数
+#define sampletime 50 //采样次数
 typedef struct 
 {
-    uint16_t streamcount;
-    uint32_t postion[sampletime]; 
-    uint32_t sum;
-    float result;
+    int16_t streamcount;
+    float postion[sampletime]; 
+    float sum;
+    float result[2];
 }CCDDATASOLVER;
 
 
