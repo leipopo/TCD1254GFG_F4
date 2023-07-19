@@ -1,5 +1,4 @@
 # dot files
-/.vscode/launch.json
 /.settings
 /.eide/log
 /.eide.usr.ctx.json
@@ -9,7 +8,7 @@
 /bin
 /obj
 /out
-MDK-ARM/TCD1254GFG_F4
+/MDK-ARM
 
 # eide template
 *.ept

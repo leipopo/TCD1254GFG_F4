@@ -11,7 +11,7 @@ void scanstart(void)
 
 void scanstop(CCDDATASOLVER *cds)
 {
-    HAL_Delay(2);
+    HAL_Delay(4);
     HAL_ADC_Stop_DMA(&hadc1);
     steppos((uint16_t *)CCDDataBuffer, ccdsize, cds);
 }
@@ -25,13 +25,13 @@ void steppos(uint16_t *data, uint32_t size, CCDDATASOLVER *cds)
         if (data[i] < stepsthreshold) {
             cds->postion[cds->streamcount] = i;
             cds->sum += i;
-		
-        cds->streamcount++;
+
+            cds->streamcount++;
             break;
-        } 
+        }
     }
 
-    if (cds->streamcount == sampletime ) {
+    if (cds->streamcount == sampletime) {
 
         cds->result[0] = cds->sum / sampletime;
         for (uint16_t i = 0; i < sampletime; i++) {
@@ -39,12 +39,11 @@ void steppos(uint16_t *data, uint32_t size, CCDDATASOLVER *cds)
                 cds->streamcount--;
                 cds->sum -= cds->postion[i];
             }
-            cds->postion[i]=0;
+            cds->postion[i] = 0;
         }
         cds->result[0]   = cds->sum / (cds->streamcount);
         cds->result[1]   = pixeltodistance(cds->result[0]);
         cds->streamcount = 0;
         cds->sum         = 0;
-
-    } 
+    }
 }
