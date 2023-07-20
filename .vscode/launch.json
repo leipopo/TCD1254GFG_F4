@@ -16,7 +16,7 @@
             "toolchainPrefix": "arm-none-eabi",
             "liveWatch": {
                 "enabled": true,
-                "samplesPerSecond": 2
+                "samplesPerSecond": 4
             }
         }
     ]
