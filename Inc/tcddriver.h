@@ -3,6 +3,9 @@
 
 #include "tim.h"
 #include "adc.h"
+#include "dma.h"
+#include "math.h"
+#include "stm32f4xx_hal_dma.h"
 
 #define ccdpixel_width                  0.00525f // ccd像素宽度 毫米
 #define focal_length                    15.18f   // 聚光凸透镜焦距
@@ -31,7 +34,7 @@
 #define osadc                           hadc1
 #define osadc_ch                        ADC_CHANNEL_8
 
-#define ccdsize                         2600
+#define ccdsize                         3000
 #define dummyposition                   21
 
 #define stepsthreshold                  1300 // 需保证环境光大于此值
@@ -48,5 +51,6 @@ typedef struct
 void scanstart(void);
 void steppos(uint16_t *data, uint32_t size, CCDDATASOLVER *cds);
 void scanstop(CCDDATASOLVER *cds);
+void tcdinit(void);
 extern volatile uint16_t CCDDataBuffer[ccdsize];
 #endif

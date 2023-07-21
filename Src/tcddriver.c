@@ -1,7 +1,27 @@
 #include "tcddriver.h"
-#include "math.h"
+
+extern DMA_HandleTypeDef hdma_adc1;
 
 volatile uint16_t CCDDataBuffer[ccdsize];
+
+void dmatransfercomplete(struct __DMA_HandleTypeDef *hdma)
+{
+    HAL_ADC_Stop_DMA(&hadc1);
+}
+
+void tcdinit(void)
+{
+    HAL_TIM_Base_Start(&ms_tim);
+    HAL_TIM_PWM_Start(&ms_tim, ms_tim_ch);
+    HAL_TIM_Base_Start(&icg_tim);
+    HAL_TIM_OnePulse_Start(&icg_tim, icg_tim_ch);
+    HAL_TIM_Base_Start(&sh_tim);
+    HAL_TIM_OnePulse_Start(&sh_tim, sh_tim_ch);
+    HAL_TIM_Base_Start(&os_tim);
+    HAL_TIM_PWM_Start(&os_tim, os_tim_ch);
+    hdma_adc1.XferCpltCallback = dmatransfercomplete;
+}
+
 void scanstart(void)
 {
     HAL_ADC_Start_DMA(&hadc1, (uint32_t *)CCDDataBuffer, ccdsize);
@@ -12,7 +32,6 @@ void scanstart(void)
 void scanstop(CCDDATASOLVER *cds)
 {
     HAL_Delay(2);
-    HAL_ADC_Stop_DMA(&hadc1);
     steppos((uint16_t *)CCDDataBuffer, ccdsize, cds);
 }
 

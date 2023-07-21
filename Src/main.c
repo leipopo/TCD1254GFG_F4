@@ -94,14 +94,7 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-    HAL_TIM_Base_Start(&ms_tim);
-    HAL_TIM_PWM_Start(&ms_tim, ms_tim_ch);
-    HAL_TIM_Base_Start(&icg_tim);
-    HAL_TIM_OnePulse_Start(&icg_tim, icg_tim_ch);
-    HAL_TIM_Base_Start(&sh_tim);
-    HAL_TIM_OnePulse_Start(&sh_tim, sh_tim_ch);
-    HAL_TIM_Base_Start(&os_tim);
-    HAL_TIM_PWM_Start(&os_tim, os_tim_ch);
+    tcdinit();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -114,7 +107,6 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
         scanstop(&cds);
-			
     }
   /* USER CODE END 3 */
 }
