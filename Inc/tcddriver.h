@@ -7,6 +7,8 @@
 #include "math.h"
 #include "stm32f4xx_hal_dma.h"
 
+#include "u6_transdata.h"
+
 #define ccdpixel_width                  0.00525f // ccd像素宽度 毫米
 #define focal_length                    15.18f   // 聚光凸透镜焦距
 #define install_distance                11.f     // 光源轴心到透镜主光轴的安装距离
@@ -43,14 +45,12 @@
 typedef struct
 {
     int16_t streamcount;
-    float postion[sampletime];
-    float sum;
-    float result[2];
+    uint16_t sumdata[ccdsize];
 } CCDDATASOLVER;
 
-void scanstart(void);
-void steppos(uint16_t *data, uint32_t size, CCDDATASOLVER *cds);
-void scanstop(CCDDATASOLVER *cds);
-void tcdinit(void);
+void scanstart(CCDDATASOLVER *sol);
+void scanstop(CCDDATASOLVER *sol);
+void tcdinit(struct __DMA_HandleTypeDef *hdma);
 extern volatile uint16_t CCDDataBuffer[ccdsize];
+extern DMA_HandleTypeDef hdma_adc1;
 #endif
