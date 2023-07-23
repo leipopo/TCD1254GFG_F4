@@ -37,11 +37,10 @@
 #define osadc_ch                        ADC_CHANNEL_8
 
 #define ccdsize                         3000
-#define dummyposition                   21
-
-#define stepsthreshold                  1300 // 需保证环境光大于此值
 
 #define sampletime                      50 // 采样次数
+#define emptysampletime                 4  // 空采样次数
+
 typedef struct
 {
     int16_t streamcount;

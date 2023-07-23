@@ -107,6 +107,8 @@ int main(void)
         // uint8_t Senbuff[] = "\r\n**** Serial Output Message by DMA ***\r\n   UART DMA Test \r\n";
         // HAL_UART_Transmit_DMA(&huart6, (uint8_t *)Senbuff, sizeof(Senbuff));
         // HAL_Delay(1000);
+        // uint16_t data[12] = {0x0102, 0x0201, 0x0201, 0x0201, 0x0201, 0x0201, 0x0201, 0x0201, 0x0201, 0x0201, 0x0201, 0x0102};
+        // trans_ccd_data(data, 12);
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */

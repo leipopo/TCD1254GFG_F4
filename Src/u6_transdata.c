@@ -5,15 +5,16 @@
 //     hdma
 // }
 
-void trans_ccd_data(uint16_t *data)
+void trans_ccd_data(uint16_t *data, uint16_t size)
 {
-    uint8_t buffer[2 * sizeof(data) + 2];
-    uint8_t *p = buffer;
-    *p++       = 0xff;
-    for (uint16_t i = 1; i < sizeof(buffer); i++) {
-        *p++ = (uint8_t)(data[i] >> 8);
-        *p++ = (uint8_t)(data[i]);
+    uint8_t Senbuff[size * 2 + 2];
+    Senbuff[size * 2]     = 0x0A;
+    Senbuff[size * 2 + 1] = 0x0D;
+    for (uint16_t i = 0; i < size; i++) {
+        Senbuff[i * 2 + 1] = data[i] & 0xFF;
+        Senbuff[i * 2 + 2] = (data[i] >> 8) & 0xFF;
     }
-    *p = 0x00;
-    HAL_UART_Transmit(&huart6, buffer, sizeof(buffer), 0xffff);
+    HAL_UART_Transmit_DMA(&huart6, (uint8_t *)Senbuff, sizeof(Senbuff));
+    while (HAL_UART_GetState(&huart6) != HAL_UART_STATE_READY)
+        ;
 }

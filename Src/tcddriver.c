@@ -29,8 +29,13 @@ void scanstart(CCDDATASOLVER *sol)
         __HAL_TIM_ENABLE(&os_tim);
     }
 
-    else if (sol->streamcount >= 1 && sol->streamcount <= sampletime) {
+    else if (sol->streamcount >= emptysampletime && sol->streamcount <= sampletime + emptysampletime - 1) {
         HAL_ADC_Start_DMA(&hadc1, (uint32_t *)CCDDataBuffer, ccdsize);
+        __HAL_TIM_ENABLE(&icg_tim);
+        __HAL_TIM_ENABLE(&sh_tim);
+    }
+    else 
+    {
         __HAL_TIM_ENABLE(&icg_tim);
         __HAL_TIM_ENABLE(&sh_tim);
     }
@@ -39,23 +44,23 @@ void scanstart(CCDDATASOLVER *sol)
 void scanstop(CCDDATASOLVER *sol)
 {
     HAL_Delay(2);
-    if (sol->streamcount == 1) {
+    if (sol->streamcount == emptysampletime) {
         for (uint16_t i = 0; i < ccdsize; i++) {
             sol->sumdata[i] = CCDDataBuffer[i];
         }
-    } else if (sol->streamcount <= sampletime) {
+    } else if (sol->streamcount <= sampletime+emptysampletime-1) {
         for (uint16_t i = 0; i < ccdsize; i++) {
             sol->sumdata[i] += CCDDataBuffer[i];
         }
     }
 
-    if (sol->streamcount == sampletime) {
+    if (sol->streamcount == sampletime + emptysampletime - 1) {
         __HAL_TIM_DISABLE(&icg_tim);
         __HAL_TIM_DISABLE(&sh_tim);
         __HAL_TIM_DISABLE(&os_tim);
         __HAL_TIM_DISABLE(&ms_tim);
         sol->streamcount = 0;
-        trans_ccd_data((uint16_t *)sol->sumdata);
+        trans_ccd_data(sol->sumdata, ccdsize);
     } else {
         sol->streamcount++;
     }

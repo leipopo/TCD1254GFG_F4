@@ -5,6 +5,6 @@
 #include <string.h>
 #include "usart.h"
 
-void trans_ccd_data(uint16_t *data);
+void trans_ccd_data(uint16_t *data, uint16_t size);
 extern DMA_HandleTypeDef hdma_usart6_tx;
 #endif
