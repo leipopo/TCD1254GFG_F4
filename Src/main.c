@@ -46,7 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-CCDDATASOLVER cds;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -96,7 +96,7 @@ int main(void)
     MX_TIM2_Init();
     MX_USART6_UART_Init();
     /* USER CODE BEGIN 2 */
-    tcdinit(&hdma_adc1);
+    tcdinit(&hdma_adc1, &iirfilter, &kf);
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -112,7 +112,7 @@ int main(void)
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
-        scanstop(&cds);
+        scanstop(&cds, &iirfilter);
     }
     /* USER CODE END 3 */
 }

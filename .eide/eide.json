@@ -36,7 +36,13 @@
                 "path": "Src/dma.c"
               },
               {
+                "path": "Src/FB_filter.c"
+              },
+              {
                 "path": "Src/gpio.c"
+              },
+              {
+                "path": "Src/KF.c"
               },
               {
                 "path": "Src/main.c"
@@ -57,10 +63,10 @@
                 "path": "Src/tim.c"
               },
               {
-                "path": "Src/usart.c"
+                "path": "Src/u6_transdata.c"
               },
               {
-                "path": "Src/u6_transdata.c"
+                "path": "Src/usart.c"
               }
             ],
             "folders": []
@@ -228,7 +234,8 @@
         "sourceDirList": [],
         "defineList": [
           "USE_HAL_DRIVER",
-          "STM32F427xx"
+          "STM32F427xx",
+          "ARM_MATH_CM4"
         ]
       }
     }

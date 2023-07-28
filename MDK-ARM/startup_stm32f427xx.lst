@@ -875,11 +875,13 @@ ARM Macro Assembler    Page 14
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=tcd1254gfg_f4\startup_stm32f427xx.d -otcd1254gfg_f4\startup_
 stm32f427xx.o -I.\RTE\_TCD1254GFG_F4 -IC:\Users\94736\AppData\Local\Arm\Packs\A
-RM\CMSIS\5.9.0\CMSIS\Core\Include -IC:\Users\94736\AppData\Local\Arm\Packs\Keil
-\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__
-UVISION_VERSION SETA 537" --predefine="_RTE_ SETA 1" --predefine="STM32F427xx S
-ETA 1" --predefine="_RTE_ SETA 1" --list=startup_stm32f427xx.lst startup_stm32f
-427xx.s
+RM\CMSIS\5.9.0\CMSIS\Core\Include -IC:\Users\94736\AppData\Local\Arm\Packs\ARM\
+CMSIS\5.9.0\CMSIS\DSP\Include -IC:\Users\94736\AppData\Local\Arm\Packs\ARM\CMSI
+S\5.9.0\CMSIS\DSP\PrivateInclude -IC:\Users\94736\AppData\Local\Arm\Packs\Keil\
+STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__U
+VISION_VERSION SETA 537" --predefine="_RTE_ SETA 1" --predefine="STM32F427xx SE
+TA 1" --predefine="_RTE_ SETA 1" --list=startup_stm32f427xx.lst startup_stm32f4
+27xx.s
 
 
 
