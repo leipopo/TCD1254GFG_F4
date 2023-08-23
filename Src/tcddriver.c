@@ -69,7 +69,7 @@ uint16_t find_last_low_diff0_point(float *data, uint16_t threshold, uint16_t *di
 
 uint16_t find_lowest_diff0_point(float *data, uint16_t *diff_0pointsx, uint16_t len)
 {
-    uint16_t temp = data[1];
+    uint16_t temp = sampletime * 56;
     for (uint16_t i = 0; i < len; i++) {
         if (data[diff_0pointsx[i]] < temp) {
             temp = diff_0pointsx[i];
@@ -102,22 +102,22 @@ void scanstop(CCDDATASOLVER *sol, FBFILTER *iirf)
         __HAL_TIM_DISABLE(&os_tim);
         __HAL_TIM_DISABLE(&ms_tim);
         sol->streamcount = 0;
-        fbfilter(iirf, sol->sumdata, sol->iir_data, ccdsize);
+        iirf->fbfilter(iirf, sol->sumdata, sol->iir_data, ccdsize);
         diff_calc(sol->iir_data, ccdsize, sol->diff_data);
         find_0diffpoints(sol->diff_data, ccdsize, sol->diff_zeropointsx);
         // find_lower0diffpoinsts(sol->iir_data, 1500, sol->diff_zeropointsx, ccdsize, sol->lowerdiff_zeropointsx);
         // last_low_diif0pointx = find_last_low_diff0_point(sol->iir_data, 1400, sol->diff_zeropointsx, ccdsize);
-        // for (uint16_t i = 0; i < lowestdiif0pointx_samplenum - 1; i++) {
-        //     lowestdiif0pointx[i] = lowestdiif0pointx[i + 1];
-        // }
+        for (uint16_t i = 0; i < lowestdiif0pointx_samplenum - 1; i++) {
+            lowestdiif0pointx[i] = lowestdiif0pointx[i + 1];
+        }
         lowestdiif0pointx[lowestdiif0pointx_samplenum - 1] = find_lowest_diff0_point(sol->iir_data, sol->diff_zeropointsx, ccdsize);
         lowestdiif0pointx_KF                               = kalmanfilter_1th(&kf, lowestdiif0pointx[lowestdiif0pointx_samplenum - 1]);
-        // if (lowestdiif0pointx[0] != 0) {
-        //     trans_ccd_data_float(sol->iir_data, ccdsize, 0xff);
-        //     trans_ccd_data_float(sol->sumdata, ccdsize, 0x00);
-        //     trans_ccd_data_uint16(lowestdiif0pointx, lowestdiif0pointx_samplenum, 0x0f);
-        // }
-        
+        if (lowestdiif0pointx[0] != 0) {
+            trans_ccd_data_float(sol->iir_data, ccdsize, 0xff);
+            trans_ccd_data_float(sol->sumdata, ccdsize, 0x00);
+            trans_ccd_data_uint16(lowestdiif0pointx, lowestdiif0pointx_samplenum, 0x0f);
+        }
+
     } else {
         sol->streamcount++;
     }

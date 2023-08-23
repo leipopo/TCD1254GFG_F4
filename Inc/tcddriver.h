@@ -38,12 +38,12 @@
 
 #define ccdsize                     2800
 
-#define sampletime                  5 // 采样次数
-#define emptysampletime             4 // 空采样次数
+#define sampletime                  50 // 采样次数
+#define emptysampletime             4  // 空采样次数
 
 #define lowestdiif0pointx_samplenum 500
 
-#define iirorder                    3
+#define iirorder                    2
 typedef struct
 {
     int16_t streamcount;
